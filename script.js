@@ -25,9 +25,8 @@ $(".dropdown-tile-3").click(function(){
   $(".blog-category-2").hide();
 });
 
-//Viewport specific functionality
-var notMobile = window.matchMedia("(min-width: 789px)");
-if(notMobile.matches){
+//Flipping tile functionality
+
       (function() {
       var cards = $(".flipping-tile");
       var length = cards.length;
@@ -45,6 +44,26 @@ if(notMobile.matches){
       }
     })();
 
+//Viewport specific functionality
+var notMobile = window.matchMedia("(min-width: 789px)");
+// if(notMobile.matches){
+//       (function() {
+//       var cards = $(".flipping-tile");
+//       var length = cards.length;
+//       for (var i  = 0; i < length; i++) {
+//         var card = cards[i];
+//         clickListener(card);
+//       }
+//       //original function
+//       function clickListener(card) {
+//         card.addEventListener( "click", function() {
+//           var classes = this.classList;
+//           classes.contains("flipped") === true ? classes.remove("flipped") : classes.add("flipped");
+//           $(this).find("h3").toggle();
+//         });
+//       }
+//     })();
+if(notMobile.matches){
     //Home page dropdown blog post functionality:
     $('.dropdown-tile').click(function(){
       //If the tile has been clicked once, turn the class indicating so off, and return all tiles to default state
@@ -52,7 +71,7 @@ if(notMobile.matches){
         $(this).removeClass('clicked-once');
         $('.dropdown-tile').each(function(){
           $(this).find('img').removeClass('desaturate');
-          $(this).find('h2').removeClass('darken-text');
+          $(this).find('h3').removeClass('darken-text');
         });
       }
 
@@ -61,12 +80,12 @@ if(notMobile.matches){
       else{
         $(this).addClass('clicked-once');
         $(this).find('img').removeClass('desaturate');
-        $(this).find('h2').removeClass('darken-text');
+        $(this).find('h3').removeClass('darken-text');
 
         $('.dropdown-tile').not(this).each(function(){
             $(this).removeClass('clicked-once');
             $(this).find('img').addClass('desaturate');
-            $(this).find('h2').addClass('darken-text');
+            $(this).find('h3').addClass('darken-text');
         });
       }
     });

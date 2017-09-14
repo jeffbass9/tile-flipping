@@ -63,7 +63,7 @@ img{
   background-color: #ff00ff;
 }
 .flipping-tile:nth-of-type(3){
-  background-color: #ffff00;
+  background-color: #000000;
 }
 .flipping-tile:nth-of-type(4){
   background-color: #00ffff;
@@ -173,9 +173,18 @@ img{
   text-align: center;
   color: white;
 }
-.dropdown-tile h3,
+.dropdown-tile img{
+  width: 100%;
+  height: auto;
+}
+.dropdown-content{
+  padding: 5%;
+  color: white;
+}
+.flipping-tile-content h4,
 .flipping-tile h3,
-.flipping-tile-content h4{
+.dropdown-tile h3
+{
   position: absolute;
   top: 50%;
   text-align: center;
@@ -187,7 +196,7 @@ img{
 }
 .dropdown-tile-2,
 .blog-category-2{
-  background-color: #ffff00;
+  background-color: #000000;
 }
 .dropdown-tile-3,
 .blog-category-3{
