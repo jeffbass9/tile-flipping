@@ -1,5 +1,5 @@
 //The following surrounding function is so that the $ will work, as you usually have to sub in the word "$" to get custom jQuery code to work with Wordpress
-(function($){
+// (function($){
 
 //Keep all blog category posts hidden when the page is first loaded
 $(document).ready(function(){
@@ -27,46 +27,31 @@ $(".dropdown-tile-3").click(function(){
 
 //Flipping tile functionality
 
-      (function() {
-      var cards = $(".flipping-tile");
-      var length = cards.length;
-      for (var i  = 0; i < length; i++) {
-        var card = cards[i];
-        clickListener(card);
-      }
-      //original function
-      function clickListener(card) {
-        card.addEventListener( "click", function() {
-          var classes = this.classList;
-          classes.contains("flipped") === true ? classes.remove("flipped") : classes.add("flipped");
-          $(this).find("h3").toggle();
-        });
-      }
-    })();
+  (function() {
+  var tiles = $(".flipping-tile");
+  var length = tiles.length;
+  for (var i  = 0; i < length; i++) {
+    var tile = tiles[i];
+    clickListener(tile);
+  }
+  //original function
+  function clickListener(tile) {
+    tile.addEventListener( "click", function() {
+      var classes = this.classList;
+      classes.contains("flipped") === true ? classes.remove("flipped") : classes.add("flipped");
+      $(this).find("h3").toggle();
+    });
+  }
+})();
 
 //Viewport specific functionality
 var notMobile = window.matchMedia("(min-width: 789px)");
-// if(notMobile.matches){
-//       (function() {
-//       var cards = $(".flipping-tile");
-//       var length = cards.length;
-//       for (var i  = 0; i < length; i++) {
-//         var card = cards[i];
-//         clickListener(card);
-//       }
-//       //original function
-//       function clickListener(card) {
-//         card.addEventListener( "click", function() {
-//           var classes = this.classList;
-//           classes.contains("flipped") === true ? classes.remove("flipped") : classes.add("flipped");
-//           $(this).find("h3").toggle();
-//         });
-//       }
-//     })();
+
 if(notMobile.matches){
     //Home page dropdown blog post functionality:
     $('.dropdown-tile').click(function(){
-      //If the tile has been clicked once, turn the class indicating so off, and return all tiles to default state
+      /* If the tile has been clicked once, turn the class
+      indicating so off, and return all tiles to default state */
       if($(this).hasClass('clicked-once')){
         $(this).removeClass('clicked-once');
         $('.dropdown-tile').each(function(){
@@ -75,8 +60,9 @@ if(notMobile.matches){
         });
       }
 
-      //If the tile has not been clicked an odd number of times, add the class that indicates it has now, remove the darkening classes
-      //from the current tile, and give the other tiles darkening classes
+      /*If the tile has not been clicked an odd number of times, add the class
+      that indicates it has now, remove the darkening classes
+      from the current tile, and give the other tiles darkening classes */
       else{
         $(this).addClass('clicked-once');
         $(this).find('img').removeClass('desaturate');
@@ -91,13 +77,12 @@ if(notMobile.matches){
     });
 }
 else{
-      //Enable the blog categories to dropdown below the tile on mobile views
+      //Enable the blog categories to drop down below the clicked tile on mobile views
       $('.blog-category-1').insertAfter('.dropdown-tile-1');
       $('.blog-category-2').insertAfter('.dropdown-tile-2');
       $('.blog-category-3').insertAfter('.dropdown-tile-3');
 
-      //Hide the navigation menu and hid the flipping tile content on mobile views
-      $(".menu").hide();
+      //Hide the navigation menu and the flipping tile content on mobile views
       $(".flipping-tile-content").hide();
 
       //Enable the dropdown functionality on all tiles that flip over on larger views
@@ -106,4 +91,4 @@ else{
       });
 }
 //End jQuery - Wordpress compatibility function
-})(jQuery );
+// })(jQuery );

@@ -1,11 +1,29 @@
+/*Tile Flipping Functionality
+Author: Jeff Bass
+Author URI: http://jeffbasswebdev.com
+Description: JS/CSS functionality enabling images to flip on click and reveal
+more information
+Version: 1.0
+License: MIT license copyright 2017 Jeff Bass Design & Development */
+
+/*  [Table of Contents]
+
+1. General Body
+2. Flipping Tiles
+3. Dropdown Tiles
+==============================================================================*/
+
 /*
+
 Colors:
 
 Magenta: #ff00ff
 Cyan: #00ffff
 Yellow: #ffff00
-Black: #000000
-*/
+Black: #000000*/
+
+/*  1. General Body
+==============================================================================*/
 *{
   font-family: "Arial", sans-serif;
 }
@@ -36,8 +54,6 @@ img{
   padding-top: 100%;
 }
 .image-box img{
-  width: 100%;
-  height: auto;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -47,7 +63,8 @@ img{
         transform: translate(-50%,-50%);
 }
 
-/*Flipping tiles*/
+/*  2. Flipping Tiles
+==============================================================================*/
 .flipping-tile{
   display: inline-block;
   position: relative;
@@ -68,83 +85,67 @@ img{
 .flipping-tile:nth-of-type(4){
   background-color: #00ffff;
 }
-@media screen and (min-width: 789px){
-  .flipping-tile:nth-of-type(1){
-      width: 25%;
-      height: auto;
-      margin: 0;
-  }
-  .flipping-tile:nth-of-type(2){
-      width: 25%;
-      height: auto;
-      margin: 0;
-  }
-  .flipping-tile:nth-of-type(3){
-      width: 25%;
-      height: auto;
-      margin: 0;
-  }
-  .flipping-tile:nth-of-type(4){
-    width: 25%;
-    height: auto;
-    margin: 0;
-  }
-  .image-box, .flipping-tile-content {
-    -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-    -webkit-transition: -webkit-transform 0.3s;
-            transition: transform 0.3s;
-  }
-  .flipping-tile-content{
-    display: inline;
-    position: absolute;
-    text-align: left;
-    vertical-align: top;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    width: 100%;
-    height: auto;
-    color: white;
-    z-index: 2;
-    text-align: center;
-    -webkit-transform: rotateY(-180deg);
-        -ms-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
-  }
 
-  .flipping-tile.flipped .image-box{
-    -webkit-transform: rotateY(-180deg);
-        -ms-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
+.image-box, .flipping-tile-content {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transition: -webkit-transform 0.3s;
+          transition: transform 0.3s;
+}
+.flipping-tile-content{
+  display: inline;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  vertical-align: top;
+  color: white;
+  z-index: 2;
+  -webkit-transform: rotateY(-180deg);
+      -ms-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+
+.flipping-tile.flipped .image-box{
+  -webkit-transform: rotateY(-180deg);
+      -ms-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+.flipping-tile.flipped .flipping-tile-content{
+  -webkit-transform: rotateY(0);
+      -ms-transform: rotateY(0);
+          transform: rotateY(0);
+}
+.image-box:hover img, .dropdown-tile:hover img{
+  opacity: 1;
+  -webkit-animation: flash 1.5s;
+      -ms-animation: flash 1.5s;
+  animation: flash 1.5s;
+}
+@-webkit-keyframes flash{
+  0% {
+    opacity: 0.4;
   }
-  .flipping-tile.flipped .flipping-tile-content{
-    -webkit-transform: rotateY(0);
-        -ms-transform: rotateY(0);
-            transform: rotateY(0);
-  }
-  .image-box:hover img, .dropdown-tile:hover img{
+  100% {
     opacity: 1;
-    -webkit-animation: flash 1.5s;
-        -ms-animation: flash 1.5s;
-    animation: flash 1.5s;
   }
-  @-webkit-keyframes flash{
-    0% {
-      opacity: 0.4;
-    }
-    100% {
-      opacity: 1;
-    }
+}
+@keyframes flash{
+  0%{
+    opacity: 0.4;
   }
-  @keyframes flash{
-    0%{
-      opacity: 0.4;
-    }
-    100%{
-      opacity: 1;
-    }
+  100%{
+    opacity: 1;
+  }
+}
+@media screen and (min-width: 789px){
+  .flipping-tile{
+    width: 25%;
+    margin: 0;
   }
   .desaturate{
     -webkit-filter: grayscale(100%);
@@ -157,20 +158,30 @@ img{
   }
 }
 
-
-/*  2.  Dropdown tiles
+/*  3.  Dropdown tiles
 ==============================================================================*/
 .dropdown-tile{
   display: inline-block;
   position: relative;
   width: 100%;
   height: auto;
+  max-height: 400px;
   text-align: center;
   color: white;
+  overflow: hidden;
+}
+.dropdown-tile:before{
+  content: "";
+  display: inline-block;
+  padding-top: 100%;
 }
 .dropdown-tile img{
-  width: 100%;
-  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%,-50%);
 }
 .dropdown-content{
   padding: 5%;
@@ -211,24 +222,6 @@ img{
 
   .dropdown-tile{
     width: calc(100%/3);
-    height: auto;
-    max-height: 400px;
     margin-right: 0;
-    overflow: hidden;
-  }
-  .dropdown-tile:before{
-    content: "";
-    display: inline-block;
-    padding-top: 100%;
-  }
-  .dropdown-tile img{
-    width: 100%;
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%,-50%);
-      -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%,-50%);
   }
 }
